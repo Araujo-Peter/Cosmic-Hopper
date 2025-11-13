@@ -1,7 +1,7 @@
 extends Area2D
 
 @export var speed_min: float = 160.0
-@export var speed_max: float = 260.0
+@export var speed_max: float = 300.0
 @export var extra_offscreen_margin: float = 64.0
 
 var _vy: float = 0.0

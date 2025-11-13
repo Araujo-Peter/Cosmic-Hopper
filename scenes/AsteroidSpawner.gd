@@ -1,18 +1,23 @@
 extends Node
 
 @export var asteroid_scene: PackedScene
-@export var spawn_interval: float = 0.9
+@export var spawn_interval: float = 0.9 # starting spawn rate for the asteroids
+@export var min_spawn_interval: float = 0.3 # minimum spawn rate per second for each asteroid
 @export var horizontal_padding: float = 32.0
+@export var spawn_interval_decay: float = 0.012 # how much the spawn rate reduces, per spawn
 
 var _timer: Timer
 var _viewport_width: float
+var _current_interval: float
 
 func _ready() -> void:
 	randomize()
 	_viewport_width = get_viewport().get_visible_rect().size.x
+	
+	_current_interval = spawn_interval
 
 	_timer = Timer.new()
-	_timer.wait_time = spawn_interval
+	_timer.wait_time = _current_interval
 	_timer.one_shot = false
 	_timer.autostart = true
 	add_child(_timer)
@@ -29,3 +34,9 @@ func _on_spawn_timeout() -> void:
 	asteroid.global_position = Vector2(x, -32.0)
 
 	get_tree().current_scene.add_child(asteroid)
+	
+	# after spawning, speed up the next spawn
+	_current_interval = max(min_spawn_interval, _current_interval - spawn_interval_decay)
+	_timer.wait_time = _current_interval
+	
+	print("Current spawn interval: ", _current_interval)
