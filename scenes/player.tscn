@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://clqe0xbaagpss"]
+
+[ext_resource type="Texture2D" uid="uid://cuyxxolb6piqd" path="res://assets/sprites/Hoppy.png" id="1_3vyb7"]
+[ext_resource type="Script" uid="uid://dtx2nq5locarw" path="res://scenes/player.gd" id="1_g2els"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g2els"]
+size = Vector2(16, 22)
+
+[node name="Player" type="Area2D"]
+scale = Vector2(2, 2)
+script = ExtResource("1_g2els")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_3vyb7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_g2els")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
