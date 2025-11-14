@@ -6,13 +6,13 @@ enum State { MENU, PLAYING, GAME_OVER }
 @onready var main_menu: Control = $UI/MainMenu
 @onready var game_over: Control = $UI/GameOver
 
-@onready var title_label: Label = $UI/MainMenu/Panel/VboxContainer/TitleLabel
-@onready var best_score_menu_label: Label = $UI/MainMenu/Panel/VBoxContainer/BestScoreLabel
-@onready var play_button: Button = $UI/MainMenu/Panel/VBoxContainer/PlayButton
+@onready var title_label: Label = $UI/MainMenu/Panel/MarginContainer/VboxContainer/TitleLabel
+@onready var best_score_menu_label: Label = $UI/MainMenu/Panel/MarginContainer/VBoxContainer/BestScoreLabel
+@onready var play_button: Button = $UI/MainMenu/Panel/MarginContainer/VBoxContainer/PlayButton
 
-@onready var final_score_label: Label = $UI/GameOver/Panel/VBoxContainer/FinalScoreLabel
-@onready var best_score_over_label: Label = $UI/GameOver/Panel/VBoxContainer/BestScoreLabel
-@onready var retry_button: Button = $UI/GameOver/Panel/VBoxContainer/RetryButton
+@onready var final_score_label: Label = $UI/GameOver/Panel/MarginContainer/VBoxContainer/FinalScoreLabel
+@onready var best_score_over_label: Label = $UI/GameOver/Panel/MarginContainer/VBoxContainer/BestScoreLabel
+@onready var retry_button: Button = $UI/GameOver/Panel/MarginContainer/VBoxContainer/RetryButton
 
 @onready var player: Area2D = $Player
 @onready var spawner: Node = $AsteroidSpawner
