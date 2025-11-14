@@ -1,5 +1,10 @@
 extends Node2D
 
+# For sound based entities
+@onready var sfx_hit: AudioStreamPlayer2D = $SFX_Hit
+@onready var sfx_button: AudioStreamPlayer2D = $SFX_Button
+@onready var music: AudioStreamPlayer2D = $Music
+
 # For camera shake on hit
 @onready var camera: Camera2D = $Camera2D
 @onready var hit_flash: ColorRect = $UI/HitFlash
@@ -54,14 +59,21 @@ func _ready() -> void:
 	_enter_menu_state()
 	
 func _on_play_pressed() -> void:
+	if sfx_button:
+		sfx_button.play()
 	_start_run()
 	
 func _on_retry_pressed() -> void:
+	if sfx_button:
+		sfx_button.play()
 	_start_run()
 	
 func _on_player_hit() -> void:
 	if state != State.PLAYING:
 		return
+		
+	if sfx_hit:
+		sfx_hit.play()
 		
 	start_screen_shake(0.25, 5.0)
 	play_hit_flash()
@@ -137,6 +149,7 @@ func _enter_menu_state() -> void:
 	if "set_enabled" in player:
 		player.set_enabled(false)
 		
+	_stop_music()
 	_update_best_score_labels()
 	
 func _enter_playing_state() -> void:
@@ -145,6 +158,8 @@ func _enter_playing_state() -> void:
 	main_menu.visible = false
 	game_over.visible = false
 	score_label.visible = true
+	
+	_start_music()
 	
 func _enter_game_over_state() -> void:
 	state = State.GAME_OVER
@@ -165,6 +180,8 @@ func _enter_game_over_state() -> void:
 	main_menu.visible = false
 	game_over.visible = true
 	score_label.visible = true # Keep the latest score visible
+	
+	_stop_music()
 	
 # Clear any existing asteroids between runs
 func _clear_asteroids() -> void:
@@ -191,4 +208,14 @@ func _save_best_score() -> void:
 	var err:= cfg.save(SAVE_PATH)
 	if err != OK:
 		push_warning("Could not save best score %s" % err)
+		
+# Helper methods to control music play
+func _start_music() -> void:
+	if music and music.stream and not music.playing:
+		music.play()
+		
+func _stop_music() -> void:
+	if music and music.playing:
+		music.stop()
+		
 	
