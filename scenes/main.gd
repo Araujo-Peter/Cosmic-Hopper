@@ -109,7 +109,7 @@ func _enter_game_over_state() -> void:
 		best_score = current_score
 		_save_best_score()
 		
-	final_score_label.text = "Score: %d" % current_score
+	final_score_label.text = "Score  %d" % current_score
 	_update_best_score_labels()
 	
 	main_menu.visible = false
@@ -122,7 +122,7 @@ func _clear_asteroids() -> void:
 		asteroid.queue_free()
 		
 func _update_best_score_labels() -> void:
-	var txt := "Best: %d" % best_score
+	var txt := "Best %d" % best_score
 	best_score_menu_label.text = txt
 	best_score_over_label.text = txt
 		
