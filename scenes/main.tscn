@@ -29,3 +29,109 @@ theme_override_fonts/font = ExtResource("5_tbgi4")
 theme_override_font_sizes/font_size = 48
 text = "0"
 horizontal_alignment = 1
+
+[node name="MainMenu" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="UI/MainMenu"]
+custom_minimum_size = Vector2(220, 220)
+layout_mode = 0
+offset_left = 70.0
+offset_top = 210.0
+offset_right = 290.0
+offset_bottom = 430.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/MainMenu/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 8
+
+[node name="TitleLabel" type="Label" parent="UI/MainMenu/Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_tbgi4")
+theme_override_font_sizes/font_size = 28
+text = "COSMIC HOPPER"
+horizontal_alignment = 1
+
+[node name="BestScoreLabel" type="Label" parent="UI/MainMenu/Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_tbgi4")
+theme_override_font_sizes/font_size = 28
+text = "Best: 0"
+horizontal_alignment = 1
+
+[node name="PlayButton" type="Button" parent="UI/MainMenu/Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("5_tbgi4")
+theme_override_font_sizes/font_size = 30
+text = "Play"
+
+[node name="GameOver" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="UI/GameOver"]
+custom_minimum_size = Vector2(220, 220)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/GameOver/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 8
+
+[node name="GameOverTitle" type="Label" parent="UI/GameOver/Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_tbgi4")
+theme_override_font_sizes/font_size = 32
+text = "GAME OVER"
+horizontal_alignment = 1
+
+[node name="FinalScoreLabel" type="Label" parent="UI/GameOver/Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_tbgi4")
+theme_override_font_sizes/font_size = 28
+text = "Score: 0"
+horizontal_alignment = 1
+
+[node name="BestScoreLabel" type="Label" parent="UI/GameOver/Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_tbgi4")
+theme_override_font_sizes/font_size = 28
+text = "Best: 0"
+horizontal_alignment = 1
+
+[node name="RetryButton" type="Button" parent="UI/GameOver/Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("5_tbgi4")
+theme_override_font_sizes/font_size = 32
+text = "RETRY"

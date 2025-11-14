@@ -9,6 +9,7 @@ extends Node
 var _timer: Timer
 var _viewport_width: float
 var _current_interval: float
+var _enabled: bool = false
 
 func _ready() -> void:
 	randomize()
@@ -19,12 +20,15 @@ func _ready() -> void:
 	_timer = Timer.new()
 	_timer.wait_time = _current_interval
 	_timer.one_shot = false
-	_timer.autostart = true
+	_timer.autostart = false
 	add_child(_timer)
 
 	_timer.timeout.connect(_on_spawn_timeout)
 
 func _on_spawn_timeout() -> void:
+	if not _enabled:
+		return
+	
 	if asteroid_scene == null:
 		return
 
@@ -39,4 +43,22 @@ func _on_spawn_timeout() -> void:
 	_current_interval = max(min_spawn_interval, _current_interval - spawn_interval_decay)
 	_timer.wait_time = _current_interval
 	
-	print("Current spawn interval: ", _current_interval)
+	#print("Current spawn interval: ", _current_interval)
+
+# Helper methods
+func set_enabled(value: bool) -> void:
+	_enabled = value
+	
+	if _timer == null:
+		return
+		
+	if _enabled:
+		if _timer.is_stopped():
+			_timer.start()
+	else:
+		_timer.stop()
+			
+func reset_difficulty() -> void:
+	_current_interval = spawn_interval
+	if _timer:
+		_timer.wait_time = _current_interval
