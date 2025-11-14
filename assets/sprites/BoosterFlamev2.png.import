@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dcw1j3tk60qug"
-path="res://.godot/imported/index.png-0c78d14d192abe5f22f8c25928ca1ab8.ctex"
+uid="uid://ce1a48pm8kqqg"
+path="res://.godot/imported/BoosterFlamev2.png-f66c7a074849b9a981ed9c40908fc5d4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://docs/index.png"
-dest_files=["res://.godot/imported/index.png-0c78d14d192abe5f22f8c25928ca1ab8.ctex"]
+source_file="res://assets/sprites/BoosterFlamev2.png"
+dest_files=["res://.godot/imported/BoosterFlamev2.png-f66c7a074849b9a981ed9c40908fc5d4.ctex"]
 
 [params]
 
