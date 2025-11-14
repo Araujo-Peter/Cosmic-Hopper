@@ -1,5 +1,15 @@
 extends Node2D
 
+# For camera shake on hit
+@onready var camera: Camera2D = $Camera2D
+@onready var hit_flash: ColorRect = $UI/HitFlash
+
+var _shake_time: float = 0.0
+var _shake_duration: float = 0.0
+var _shake_magnitude: float = 0.0
+var _camera_base_offset: Vector2 = Vector2.ZERO
+
+# Enum to control game states
 enum State { MENU, PLAYING, GAME_OVER }
 
 @onready var score_label: Label = $UI/ScoreLabel
@@ -28,6 +38,11 @@ const SAVE_KEY := "best_score"
 func _ready() -> void:
 	_load_best_score()
 	
+	_camera_base_offset = camera.offset
+	
+	hit_flash.visible = false
+	hit_flash.modulate.a = 0.0
+	
 	# Connect UI signals
 	play_button.pressed.connect(_on_play_pressed)
 	retry_button.pressed.connect(_on_retry_pressed)
@@ -47,6 +62,10 @@ func _on_retry_pressed() -> void:
 func _on_player_hit() -> void:
 	if state != State.PLAYING:
 		return
+		
+	start_screen_shake(0.25, 5.0)
+	play_hit_flash()
+	
 	_enter_game_over_state()
 
 func _process(delta: float) -> void:
@@ -55,6 +74,37 @@ func _process(delta: float) -> void:
 		score += delta
 		score_label.text = str(int(score))
 		
+	_update_screen_shake(delta)
+	
+func _update_screen_shake(delta: float) -> void:
+	if _shake_time > 0.0:
+		_shake_time -= delta
+		var t :float = clamp(_shake_time / max(_shake_duration, 0.001), 0.0, 1.0)
+		# Fade out the shake over time
+		var current_mag := _shake_magnitude * t
+		var offset := Vector2(
+			randf_range(-current_mag, current_mag),
+			randf_range(-current_mag, current_mag)
+		)
+		camera.offset = _camera_base_offset + offset
+	else:
+		camera.offset = _camera_base_offset
+		
+func start_screen_shake(duration: float = 0.25, magnitude: float = 4.0) -> void:
+	_shake_time = duration
+	_shake_duration = duration
+	_shake_magnitude = magnitude
+
+func play_hit_flash() -> void:
+	hit_flash.modulate.a = 0.5
+	hit_flash.visible = true
+	
+	var tween := create_tween()
+	tween.tween_property(hit_flash, "modulate:a", 0.0, 0.2)
+	tween.finished.connect(func() -> void:
+		hit_flash.visible = false
+	)
+
 func _start_run() -> void:
 	score = 0.0
 	score_label.text = "0"
