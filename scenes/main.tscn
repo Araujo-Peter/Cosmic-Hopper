@@ -34,6 +34,7 @@ text = "0"
 horizontal_alignment = 1
 
 [node name="MainMenu" type="Control" parent="UI"]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -86,6 +87,12 @@ size_flags_vertical = 4
 theme_override_fonts/font = ExtResource("5_tbgi4")
 theme_override_font_sizes/font_size = 30
 text = "Play"
+
+[node name="LeaderboardButton" type="Button" parent="UI/MainMenu/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_tbgi4")
+theme_override_font_sizes/font_size = 24
+text = "Leaderboard"
 
 [node name="GameOver" type="Control" parent="UI"]
 visible = false
@@ -167,6 +174,120 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(1, 0, 0, 1)
 
+[node name="NamePopup" type="Control" parent="UI"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="UI/NamePopup"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -130.0
+offset_top = -90.0
+offset_right = 130.0
+offset_bottom = 90.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/NamePopup/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_top = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/NamePopup/Panel/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="NameTitleLabel" type="Label" parent="UI/NamePopup/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_tbgi4")
+theme_override_font_sizes/font_size = 20
+text = "Enter your name"
+horizontal_alignment = 1
+
+[node name="NameInput" type="LineEdit" parent="UI/NamePopup/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_tbgi4")
+theme_override_font_sizes/font_size = 24
+placeholder_text = "CHEVY3"
+alignment = 1
+max_length = 6
+
+[node name="NameErrorLabel" type="Label" parent="UI/NamePopup/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_tbgi4")
+theme_override_font_sizes/font_size = 24
+horizontal_alignment = 1
+
+[node name="NameConfirmButton" type="Button" parent="UI/NamePopup/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_tbgi4")
+theme_override_font_sizes/font_size = 20
+text = "Confirm"
+
+[node name="Leaderboard" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="UI/Leaderboard"]
+custom_minimum_size = Vector2(260, 260)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/Leaderboard/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Leaderboard/Panel/MarginContainer"]
+layout_mode = 2
+
+[node name="LeaderboardTitle" type="Label" parent="UI/Leaderboard/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_tbgi4")
+theme_override_font_sizes/font_size = 24
+text = "LeaderBoard"
+horizontal_alignment = 1
+
+[node name="ScoresContainer" type="VBoxContainer" parent="UI/Leaderboard/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="CloseLeaderboardButton" type="Button" parent="UI/Leaderboard/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_tbgi4")
+theme_override_font_sizes/font_size = 20
+text = "Close"
+
 [node name="SFX_Hit" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("6_tipki")
 volume_db = 10.0
@@ -177,3 +298,5 @@ stream = ExtResource("7_85g3d")
 [node name="Music" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("8_choun")
 volume_db = 10.0
+
+[node name="LeaderboardRequest" type="HTTPRequest" parent="."]
