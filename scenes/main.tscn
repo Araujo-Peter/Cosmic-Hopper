@@ -158,6 +158,7 @@ theme_override_font_sizes/font_size = 32
 text = "RETRY"
 
 [node name="HitFlash" type="ColorRect" parent="UI"]
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -175,3 +176,4 @@ stream = ExtResource("7_85g3d")
 
 [node name="Music" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("8_choun")
+volume_db = 10.0
